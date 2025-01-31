@@ -1,15 +1,14 @@
 function TodoList() {
     return (
-      <div>
+    <div>
         <h2>To-Do-Liste</h2>
         <ul>
-          <li>Erstes To-Do</li>
-          <li>Zweites To-Do</li>
-          <li>Drittes To-Do</li>
+        <li>Erstes To-Do</li>
+        <li>Zweites To-Do</li>
+        <li>Drittes To-Do</li>
         </ul>
-      </div>
+    </div>
     );
-  }
-  
-  export default TodoList;
-  
+}
+
+export default TodoList;
