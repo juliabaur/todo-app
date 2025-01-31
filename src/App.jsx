@@ -1,10 +1,13 @@
+import TodoList from './components/TodoList';
+
+
+
 function App() {
     return (
-      <div>
+    <div>
         <h1>My to do list</h1>
-      </div>
+    </div>
     );
-  }
-  
-  export default App;
-  
+}
+
+export default App;
