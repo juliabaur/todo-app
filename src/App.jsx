@@ -12,6 +12,8 @@ function App() {
   });
 
   const [newTodo, setNewTodo] = useState('');
+  const [startDate, setStartDate] = useState('');
+  const [endDate, setEndDate] = '';
 
   useEffect(() => {
     localStorage.setItem('todos', JSON.stringify(todos));
@@ -23,9 +25,23 @@ function App() {
 
   const handleAddTodo = () => {
     if (newTodo.trim()) {
-      setTodos([...todos, newTodo]);
+      const newTask = {
+        text: newTodo,
+        startDate: startDate || "Not set",
+        endDate: endDate || "Not set",
+      };
+      setTodos([...todos, newTask]);
       setNewTodo('');
+      setStartDate('');
+      setEndDate('');
     }
+  };
+
+  const handleEditTodo = (index, newStartDate, newEndDate) => {
+    const updatedTodos = todos.map((todo, i) =>
+      i === index ? { ...todo, startDate: newStartDate || "Not set", endDate: newEndDate || "Not set" } : todo
+    );
+    setTodos(updatedTodos);
   };
 
   const handleDone = (index) => {
@@ -45,14 +61,16 @@ function App() {
   return (
     <div>
       <h1>My To-Do List</h1>
-      <TodoList todos={todos} onDone={handleDone} onDelete={handleDeleteTodo} />
-      
+      <TodoList todos={todos} onDone={handleDone} onDelete={handleDeleteTodo} onEdit={handleEditTodo} />
+
       <input
         type="text"
         value={newTodo}
         onChange={(e) => setNewTodo(e.target.value)}
         placeholder="New task"
       />
+      <input type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)} />
+      <input type="date" value={endDate} onChange={(e) => setEndDate(e.target.value)} />
       <button onClick={handleAddTodo}>Add To-Do</button>
 
       <DoneList doneTodos={doneTodos} onDelete={handleDeleteDone} />
