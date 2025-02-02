@@ -1,10 +1,13 @@
-function TodoList({ todos }) {
+function TodoList({ todos, onDone }) {
     return (
         <div>
         <h2>To-Do List</h2>
         <ul>
             {todos.map((todo, index) => (
-            <li key={index}>{todo}</li>
+            <li key={index}>{todo}
+            <button onClick={() => onDone(index)}>Done</button>
+            {/* ✅ Done-Button */}
+            </li>
             ))}
         </ul>
         </div>
