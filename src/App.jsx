@@ -3,7 +3,6 @@ import TodoList from './components/TodoList';
 import DoneList from './components/DoneList';
 
 function App() {
-  // ⬇️ Initiale Daten aus localStorage holen oder leere Arrays setzen
   const [todos, setTodos] = useState(() => {
     return JSON.parse(localStorage.getItem('todos')) || [];
   });
@@ -14,7 +13,6 @@ function App() {
 
   const [newTodo, setNewTodo] = useState('');
 
-  // ⬇️ To-Dos in localStorage speichern, wenn sich die Listen ändern
   useEffect(() => {
     localStorage.setItem('todos', JSON.stringify(todos));
   }, [todos]);
@@ -36,10 +34,18 @@ function App() {
     setTodos(todos.filter((_, i) => i !== index));
   };
 
+  const handleDeleteTodo = (index) => {
+    setTodos(todos.filter((_, i) => i !== index));
+  };
+
+  const handleDeleteDone = (index) => {
+    setDoneTodos(doneTodos.filter((_, i) => i !== index));
+  };
+
   return (
     <div>
       <h1>My To-Do List</h1>
-      <TodoList todos={todos} onDone={handleDone} />
+      <TodoList todos={todos} onDone={handleDone} onDelete={handleDeleteTodo} />
       
       <input
         type="text"
@@ -49,7 +55,7 @@ function App() {
       />
       <button onClick={handleAddTodo}>Add To-Do</button>
 
-      <DoneList doneTodos={doneTodos} />
+      <DoneList doneTodos={doneTodos} onDelete={handleDeleteDone} />
     </div>
   );
 }
