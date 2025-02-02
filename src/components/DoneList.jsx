@@ -5,8 +5,9 @@ function DoneList({ doneTodos, onDelete }) {
         <ul>
           {doneTodos.map((todo, index) => (
             <li key={index}>
-              {todo}
-              <button onClick={() => onDelete(index)}>❌ Delete</button> {/* ✅ Löschen-Button */}
+              <strong>{todo.text}</strong> <br />
+              Start: {todo.startDate} | End: {todo.endDate}
+              <button onClick={() => onDelete(index)}>❌ Delete</button>
             </li>
           ))}
         </ul>
