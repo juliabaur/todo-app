@@ -73,7 +73,7 @@ function App() {
       />
       <input type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)} />
       <input type="date" value={endDate} onChange={(e) => setEndDate(e.target.value)} />
-      <button onClick={handleAddTodo}>Add To-Do</button>
+      <button onClick={handleAddTodo}>Add To Do</button>
 
       <DoneList doneTodos={doneTodos} onDelete={handleDeleteDone} />
     </div>
