@@ -1,15 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import TodoList from './components/TodoList';
 import DoneList from './components/DoneList';
 
 function App() {
-  const [todos, setTodos] = useState([
-    'First To-Do',
-    'Second To-Do',
-    'Third To-Do',
-  ]);
-  const [doneTodos, setDoneTodos] = useState([]); // ✅ Hier speichern wir erledigte To-Dos
+  // ⬇️ Initiale Daten aus localStorage holen oder leere Arrays setzen
+  const [todos, setTodos] = useState(() => {
+    return JSON.parse(localStorage.getItem('todos')) || [];
+  });
+
+  const [doneTodos, setDoneTodos] = useState(() => {
+    return JSON.parse(localStorage.getItem('doneTodos')) || [];
+  });
+
   const [newTodo, setNewTodo] = useState('');
+
+  // ⬇️ To-Dos in localStorage speichern, wenn sich die Listen ändern
+  useEffect(() => {
+    localStorage.setItem('todos', JSON.stringify(todos));
+  }, [todos]);
+
+  useEffect(() => {
+    localStorage.setItem('doneTodos', JSON.stringify(doneTodos));
+  }, [doneTodos]);
 
   const handleAddTodo = () => {
     if (newTodo.trim()) {
@@ -20,8 +32,8 @@ function App() {
 
   const handleDone = (index) => {
     const completedTodo = todos[index];
-    setDoneTodos([...doneTodos, completedTodo]); // In die Done-Liste verschieben
-    setTodos(todos.filter((_, i) => i !== index)); // Aus der ursprünglichen Liste entfernen
+    setDoneTodos([...doneTodos, completedTodo]);
+    setTodos(todos.filter((_, i) => i !== index));
   };
 
   return (
