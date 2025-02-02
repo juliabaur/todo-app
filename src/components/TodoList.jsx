@@ -2,6 +2,7 @@ import { useState } from "react";
 
 function TodoList({ todos, onDone, onDelete, onEdit }) {
   const [editIndex, setEditIndex] = useState(null);
+  const [newText, setNewText] = useState("");
   const [newStartDate, setNewStartDate] = useState("");
   const [newEndDate, setNewEndDate] = useState("");
 
@@ -20,6 +21,12 @@ function TodoList({ todos, onDone, onDelete, onEdit }) {
             {editIndex === index && (
               <div>
                 <input
+                  type="text"
+                  value={newText}
+                  onChange={(e) => setNewText(e.target.value)}
+                  placeholder="Edit task name"
+                />
+                <input
                   type="date"
                   value={newStartDate}
                   onChange={(e) => setNewStartDate(e.target.value)}
@@ -31,8 +38,9 @@ function TodoList({ todos, onDone, onDelete, onEdit }) {
                 />
                 <button
                   onClick={() => {
-                    onEdit(index, newStartDate, newEndDate);
+                    onEdit(index, newText, newStartDate, newEndDate);
                     setEditIndex(null);
+                    setNewText("");
                     setNewStartDate("");
                     setNewEndDate("");
                   }}
