@@ -37,9 +37,11 @@ function App() {
     }
   };
 
-  const handleEditTodo = (index, newStartDate, newEndDate) => {
+  const handleEditTodo = (index, newText, newStartDate, newEndDate) => {
     const updatedTodos = todos.map((todo, i) =>
-      i === index ? { ...todo, startDate: newStartDate || "Not set", endDate: newEndDate || "Not set" } : todo
+      i === index
+        ? { ...todo, text: newText || todo.text, startDate: newStartDate || todo.startDate, endDate: newEndDate || todo.endDate }
+        : todo
     );
     setTodos(updatedTodos);
   };
