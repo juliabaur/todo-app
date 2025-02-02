@@ -1,14 +1,14 @@
-function TodoList() {
+function TodoList({ todos }) {
     return (
         <div>
         <h2>To-Do List</h2>
         <ul>
-            <li>First To-Do</li>
-            <li>Second To-Do</li>
-            <li>Third To-Do</li>
+            {todos.map((todo, index) => (
+            <li key={index}>{todo}</li>
+            ))}
         </ul>
         </div>
     );
-}
+    }
 
 export default TodoList;
