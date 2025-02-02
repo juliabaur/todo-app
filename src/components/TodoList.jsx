@@ -1,17 +1,19 @@
-function TodoList({ todos, onDone }) {
+function TodoList({ todos, onDone, onDelete }) {
     return (
-        <div>
+      <div>
         <h2>To-Do List</h2>
         <ul>
-            {todos.map((todo, index) => (
-            <li key={index}>{todo}
-            <button onClick={() => onDone(index)}>Done</button>
-            {/* ✅ Done-Button */}
+          {todos.map((todo, index) => (
+            <li key={index}>
+              {todo} 
+              <button onClick={() => onDone(index)}>Done</button> 
+              <button onClick={() => onDelete(index)}>❌ Delete</button> {/* ✅ Löschen-Button */}
             </li>
-            ))}
+          ))}
         </ul>
-        </div>
+      </div>
     );
-    }
-
-export default TodoList;
+  }
+  
+  export default TodoList;
+  
